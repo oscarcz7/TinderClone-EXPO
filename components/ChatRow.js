@@ -24,7 +24,7 @@ const ChatRow = ({ matchDetails }) => {
           collection(db, "matches", matchDetails.id, "messages"),
           orderBy("timeStamp", "desc")
         ),
-        (snapshot) => setLastMessage(snapshot.docs[0].data()?.message)
+        (snapshot) => setLastMessage(snapshot.docs[0]?.data()?.message)
       ),
     [matchDetails, db]
   );

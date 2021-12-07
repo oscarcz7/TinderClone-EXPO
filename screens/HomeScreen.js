@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "tailwind-rn";
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import Swiper from "react-native-deck-swiper";
+import * as ImagePicker from 'expo-image-picker';
 import {
   collection,
   doc,
@@ -28,13 +29,6 @@ import {
 } from "@firebase/firestore";
 import { db } from "../firebase";
 import generateId from "../lib/generateId";
-// const DUMMY_DATA = [
-//     { id: 1, firstName: 'John', lastName: 'Doe', age: '20', university: 'UDLA', photoURL: 'https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80', career: 'Software' },
-//     { id: 2, firstName: 'Jane', lastName: 'Doe', age: '22', university: 'UDLA', photoURL: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80', career: 'Diseno' },
-//     { id: 3, firstName: 'Mike', lastName: 'Doe', age: '23', university: 'UDLA', photoURL: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80', career: 'Ciencias' },
-//     { id: 4, firstName: 'Dayanne', lastName: 'Doe', age: '21', university: 'UDLA', photoURL: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80', career: 'Gastronomia' },
-//     { id: 4, firstName: 'Juliana', lastName: 'Doe', age: '21', university: 'UDLA', photoURL: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80', career: 'Gastronomia' },
-// ];
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -199,7 +193,7 @@ const HomeScreen = () => {
                 <View
                   style={[
                     tw(
-                      "absolute bottom-0 bg-white w-full h-20 justify-between flex-row px-6 py-2 rounded-b-xl"
+                      "absolute bottom-0 bg-white w-full h-32 justify-between flex-row px-6 rounded-b-lg"
                     ),
                     styles.cardShadow,
                   ]}
@@ -208,9 +202,11 @@ const HomeScreen = () => {
                     <Text style={tw("text-xl font-bold")}>
                       {card.displayName}
                     </Text>
-                    <Text>{card.career}</Text>
+                    <Text style={tw("text-lg font-bold")}>{card.career}</Text>
+                    <Text>{card.bio}</Text>
+                    <Text>{card.isChecked === true ? "Doy tutorias" : "No disponiple para tutorias"}</Text>
                   </View>
-                  <Text style={tw("text-2xl font-bold")}>{card.age}</Text>
+                  <Text style={tw("text-2xl font-bold text-red-400")}>{card.age}</Text>
                 </View>
               </View>
             ) : (
@@ -267,10 +263,10 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 0.89,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowRadius: 1.2,
     elevation: 2,
   },
 });
