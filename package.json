@@ -31,19 +31,5 @@
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
-  "expo": {
-    "name": "Udla Match",
-    "icon": "./assets/udlamatch.png",
-    "version": "1.0.0",
-    "slug": "udla-match",
-    "ios": {
-      "bundleIdentifier": "host.exp.exponent",
-      "buildNumber": "1.0.0"
-    },
-    "android": {
-      "package": "host.exp.exponent",
-      "versionCode": 1
-    }
-  },
   "private": true
 }
